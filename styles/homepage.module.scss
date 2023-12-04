@@ -1,0 +1,218 @@
+@use 'variables';
+
+.main {
+    display: flex;
+    justify-content: center;
+
+    .logo {
+        margin-top: 10px;
+        position: absolute;
+        left: 10px;
+        height: 36px;
+        width: 173px;
+    }
+}
+
+
+.login-page-left {
+    display: none;
+}
+
+.login-page-right {
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    // border: 1px solid green;
+}
+
+.login-form {
+    // border: 2px solid green;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 100%;
+    // justify-content: center;
+
+    .title {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 150px;
+
+        h2 {
+            font-size: 40px;
+            color: variables.$primary-color;
+            font-weight: 700;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: -1.6px;
+        }
+
+        h3 {
+            color: variables.$primary-font-color;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: normal;
+            font-style: normal;
+        }
+    }
+
+    .input-section {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-top: 60px;
+    }
+
+    .reset-password {
+        color: variables.$secondary-color;
+        font-size: 12px;
+        font-weight: 600;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        margin-top: 24px;
+    }
+
+    .form-submit {
+        width: 100%;
+        height: 50px;
+        border-radius: 5px;
+        color: #fff;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: normal;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        text-align: center;
+        background-color: variables.$secondary-color;
+        margin-top: 30px;
+    }
+}
+
+
+
+.inputer {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    display: flex;
+    border: 2px solid variables.$border;
+    padding: 0 16px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.inputer {
+
+    input {
+        font-size: 14px;
+        line-height: normal;
+        font-weight: 400;
+        font-style: normal;
+        color: variables.$primary-font-color;
+        height: 20px;
+        // border: 1px solid black;
+        outline: none;
+    }
+
+    input[type=password]::-ms-reveal,
+    input[type=password]::-ms-clear {
+        display: none;
+    }
+
+    .password-reveal {
+        width: 50px;
+        height: 12.5px;
+        color: variables.$secondary-color;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+    }
+
+}
+
+@media only screen and (min-width: 600px) {
+    .main {
+        justify-content: flex-start;
+        padding: 0 5px;
+
+        .logo {
+            margin-top: 70px;
+            left: 30px;
+        }
+    }
+
+    .login-page-left {
+        width: 52%;
+        display: flex;
+        flex-direction: column;
+        background-color: variables.$secondary-bg;
+        align-items: center;
+
+        .homepage-image {
+            margin-top: 160px;
+            position: relative;
+            height: 337px;
+            width: 90%;
+            // border: 1px solid green;
+            background-image: url("../public/images/homepage-image.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+
+    .login-page-right {
+        width: 48%;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .main {
+        justify-content: flex-start;
+        // padding:0 5px;
+
+        .logo {
+            margin-top: 106px;
+            left: 97px;
+        }
+    }
+
+    .login-page-left {
+        width: 52%;
+        display: flex;
+        flex-direction: column;
+        background-color: variables.$secondary-bg;
+        align-items: center;
+
+        .homepage-image {
+            margin-top: 280px;
+            position: relative;
+            height: 337px;
+            width: 600px;
+            // border: 1px solid green;
+            background-image: url("../public/images/homepage-image.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+
+    .login-page-right {
+        width: 48%;
+    }
+
+    .login-form {
+        width: 447px;
+
+        .title {
+            margin-top: 220px;
+        }
+    }
+}
