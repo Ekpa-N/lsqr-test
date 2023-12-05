@@ -1,0 +1,148 @@
+@use 'variables';
+
+.main {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    width: screen;
+    height: 100%;
+
+    .top-bar {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        background: #FFF;
+        box-shadow: 3px 0px 20px 0px rgba(0, 0, 0, 0.04);
+        align-items: center;
+        padding: 0 2px;
+
+        .hamburger {
+            flex-direction: column;
+            height: 30px;
+            width: 40px;
+            justify-content: space-between;
+            position: relative;
+
+            button {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                // background-color: yellow;
+            }
+
+            div {
+                height: 7px;
+                border-radius: 10px;
+                width: 100%;
+                background-color: variables.$primary-color;
+            }
+        }
+    }
+
+    .bottom-section {
+        // border: 2px solid black;
+        position: relative;
+        display: flex;
+        width: 100%;
+        flex-grow: 1;
+
+        .side-bar {
+            width: 283px;
+            height: 100%;
+            box-shadow: variables.$primary-shadow;
+            overflow: auto;
+            z-index: 2;
+            background-color: #fff;
+            transition: all linear 1s;
+            // border: 1px solid yellow;
+
+            .organization {
+                color: variables.$primary-color;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                margin-left: 5px;
+            }
+
+            .section-list {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                margin-top: 41px;
+
+                .section-title {
+                    color: variables.$primary-font-color;
+                    font-size: 12px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: normal;
+                    margin-left: 30px;
+                    width: fit-content;
+                }
+
+                .list {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+
+                    .list-item {
+                        // border: 1px solid green;
+                        width: 100%;
+                        height: 40px;
+                        display: flex;
+                        gap: 5px;
+                        padding-left: 30px;
+                        align-items: center;
+                        position: relative;
+                    }
+                }
+            }
+        }
+
+        .side-bar::-webkit-scrollbar {
+            width: 3px;
+        }
+        
+        .side-bar::-webkit-scrollbar-track {
+            box-shadow: variables.$primary-shadow;
+        }
+        
+        .side-bar::-webkit-scrollbar-thumb {
+              border-radius: 55px;
+            background-color: variables.$primary-color;
+            // outline: 1px solid slategrey;
+          }
+
+        .main-section {
+            border: 1px solid green;
+            // background-color: variables.$secondary-bg;
+            z-index: 1;
+            background-color: blue;
+        }
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .main {
+
+        .bottom-section {
+
+            .side-bar {
+                height: 700px;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .main {
+        .bottom-section {
+            .side-bar {
+                height: 800px;
+            }
+        }
+    }
+}
+

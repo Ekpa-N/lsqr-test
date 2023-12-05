@@ -2,14 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
- 
-  }
-}
 
 body {
+  /* background-color: yellow; */
+  width: 100vw;
+  height:100vh;
+  /* position: relative; */
+  /* overflow: hidden; */
 }
