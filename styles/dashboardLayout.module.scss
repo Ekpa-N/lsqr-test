@@ -15,6 +15,8 @@
         box-shadow: 3px 0px 20px 0px rgba(0, 0, 0, 0.04);
         align-items: center;
         padding: 0 2px;
+        position: fixed;
+        z-index: 10;
 
         .hamburger {
             flex-direction: column;
@@ -39,12 +41,12 @@
         }
     }
 
-    .bottom-section {
-        // border: 2px solid black;
+    .bottom-section {        
         position: relative;
         display: flex;
         width: 100%;
-        flex-grow: 1;
+        height: 100%;
+        // overflow: auto;
 
         .side-bar {
             width: 283px;
@@ -54,7 +56,6 @@
             z-index: 2;
             background-color: #fff;
             transition: all linear 1s;
-            // border: 1px solid yellow;
 
             .organization {
                 color: variables.$primary-color;
@@ -88,7 +89,6 @@
                     width: 100%;
 
                     .list-item {
-                        // border: 1px solid green;
                         width: 100%;
                         height: 40px;
                         display: flex;
@@ -101,47 +101,16 @@
             }
         }
 
-        .side-bar::-webkit-scrollbar {
-            width: 3px;
-        }
-        
-        .side-bar::-webkit-scrollbar-track {
-            box-shadow: variables.$primary-shadow;
-        }
-        
-        .side-bar::-webkit-scrollbar-thumb {
-              border-radius: 55px;
-            background-color: variables.$primary-color;
-            // outline: 1px solid slategrey;
-          }
-
         .main-section {
-            border: 1px solid green;
-            // background-color: variables.$secondary-bg;
+            background-color: variables.$secondary-bg;
             z-index: 1;
-            background-color: blue;
-        }
-    }
-}
-
-@media only screen and (min-width: 1280px) {
-    .main {
-
-        .bottom-section {
-
-            .side-bar {
-                height: 700px;
-            }
-        }
-    }
-}
-
-@media only screen and (min-width: 1440px) {
-    .main {
-        .bottom-section {
-            .side-bar {
-                height: 800px;
-            }
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            border: 3px solid yellow;
+            flex-grow: 1;
+            padding: 0 0 50px 0;
+            height: 100%;
         }
     }
 }

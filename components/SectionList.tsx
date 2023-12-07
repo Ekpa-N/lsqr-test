@@ -14,8 +14,12 @@ const List: React.FC<ListProps> = ({ title, active, list }) => {
         <div className={`${dashboard["section-list"]}`}>
             <h2 className={`${dashboard["section-title"]}`}>{title}</h2>
             <ul className={`${dashboard.list}`}>
-                {list.map((item:{name:string, route: string, img: string})=> {
-                    return <ListItem title={item.name} linkTo={item.route} img={item.img} active={active} />
+                {list.map((item: { name: string, route: string, img: string }, index: number) => {
+                    return (
+                        <div className="w-full" key={index}>
+                            <ListItem title={item.name} linkTo={item.route} img={item.img} active={active} />
+                        </div>
+                    )
                 })}
             </ul>
         </div>

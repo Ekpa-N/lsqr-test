@@ -1,0 +1,184 @@
+@use 'variables';
+
+.main {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    // gap: 40px;
+    // border: 2px solid orange;
+    margin-top: 160px;
+
+    .page-title {
+        color: variables.$primary-color;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+
+    .card-holder {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 40px;
+        
+        .card {
+            display: flex;
+            background-color: #fff;
+            // background-color: green;
+            flex-direction: column;
+            box-shadow: variables.$card-shadow;
+            width: 100%;
+            height: 160px;
+            border-radius: 4px;
+            border: variables.$card-border;
+        }
+    }
+    
+    .table-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        height: 640px;
+        // height: 240px;
+        overflow-x: auto;
+        border: 2px solid orange;
+        margin-top: 40px;
+        
+    }
+
+    .paginator {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+        // border: 2px solid blue;
+
+
+        .display-count {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            width: 100%;
+            justify-content: center;
+
+            .showing {
+                color: variables.$primary-font-color;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+            
+            .count {
+                display: flex;
+                justify-content: space-around;
+                background-color: variables.$paginator-tab;
+                border-radius: 4px;
+                width: 80px;
+                height: 30px;
+            }
+            
+            .total {
+                color: variables.$primary-font-color;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+
+        }
+    }
+}
+
+.page-select {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    position: relative;
+    background-color: variables.$paginator-tab;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div {
+        position: relative;
+        width: 14px;
+        height: 14px;
+    }
+}
+
+@media only screen and (min-width: 700px) {
+    .main {
+        .paginator {
+            // border: 1px solid green;
+            flex-direction: row;
+            align-items: center;
+            gap: 0;
+            justify-content: space-between;
+
+
+            .display-count {
+                width: fit-content;
+                // border: 1px solid blue;
+                justify-content: flex-start;
+            }
+        }
+
+    }
+}
+
+@media only screen and (min-width: 837px) {
+    .main {
+        padding: 0 20px;
+
+        .page-title {
+            color: variables.$primary-color;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+
+        .card-holder {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            .card {
+                width: 47%;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .main {
+        padding: 0 20px;
+
+        .page-title {
+            color: variables.$primary-color;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+
+        .card-holder {
+            flex-wrap: nowrap;
+            gap: 0;
+
+            .card {
+                width: 24%;
+            }
+        }
+    }
+}

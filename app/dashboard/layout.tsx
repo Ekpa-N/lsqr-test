@@ -2,9 +2,7 @@
 import { tabs } from '@/constants'
 import { useCallback, useEffect, useState } from "react"
 import ImageHolder from "@/components/ImageHolder"
-import variables from "@/styles/variables.module.scss"
 import dashboard from "@/styles/dashboardLayout.module.scss"
-import ListItem from '@/components/ListItem'
 import List from '@/components/SectionList'
 
 type mobileState = {
@@ -51,12 +49,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 setSideBar({ isSideBar: "left-[0]" })
             }
         }
-
-        window.addEventListener('resize', windowChecker)
-        // window.addEventListener('click', debouncedCloseSideBar)
+        
+        if (window.innerWidth < 700) {
+            window.addEventListener('click', debouncedCloseSideBar)
+        }
+        if (window.innerWidth > 700) {
+            window.addEventListener('resize', windowChecker)
+        }
         return (() => {
             window.removeEventListener('resize', windowChecker)
-            // window.removeEventListener('click', debouncedCloseSideBar)
+            window.removeEventListener('click', debouncedCloseSideBar)
         })
     }, [debouncedCloseSideBar])
 
@@ -70,22 +72,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         setSideBar({ isSideBar: "left-[0]" })
     }
 
-
-    function closeSideBar(e: MouseEvent) {
-        // e.stopPropagation()
-        console.log(e.target)
-        // const isClickedOutsideDiv = !(e.target as HTMLElement).closest('#side-bar');
-        // const isClickedOutsideButton = !(e.target as HTMLElement).closest('#side-bar-handler');
-        // if(!isClickedOutsideButton) {
-        //     console.log("button")
-        //     handleSideBar()
-        // } 
-        // else if (isClickedOutsideDiv) {
-        //     setSideBar({ isSideBar: "left-[-283px]" })
-        // }
-
-        // console.log("sideBar: ", isClickedOutsideDiv, " button: ", isClickedOutsideButton)
-    }
 
     function debounce(func: Function, delay: number) {
         let timeoutId: number | null;
@@ -117,34 +103,35 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </div>
             <div className={`${dashboard["bottom-section"]}`}>
                 <div id="side-bar" className={`${dashboard["side-bar"]} ${mobileView.isMobile ? "absolute" : "relative"} ${sideBar.isSideBar}`}>
-                    <li className='flex items-center ml-[30px] mt-[39px]'>
+                    <li className='flex items-center ml-[30px] mt-[139px]'>
                         <div className='w-[16px] h-[16px] relative'>
-                            <ImageHolder filling={true} src="./images/dashboard/organization.svg" />
+                            <ImageHolder filling={true} src="../images/dashboard/organization.svg" />
                         </div>
                         <h2 className={`${dashboard["organization"]}`}>Switch Organization</h2>
                         <div className='w-[14px] h-[14px] relative ml-[5px]'>
-                            <ImageHolder filling={true} src="./images/dashboard/caret-down.svg" />
+                            <ImageHolder filling={true} src="../images/dashboard/caret-down.svg" />
                         </div>
                     </li>
                     <li className='flex items-center ml-[30px] mt-[39px]'>
                         <div className='w-[16px] h-[16px] relative'>
-                            <ImageHolder filling={true} src="./images/dashboard/home-icon.svg" />
+                            <ImageHolder filling={true} src="../images/dashboard/home-icon.svg" />
                         </div>
                         <h2 className={`${dashboard["organization"]}`}>Dashboard</h2>
                     </li>
 
-                    {/* <div className='w-[90%] h-[1000px] bg-black'></div> */}
-
-                    {tabs.map((item, index)=>{
+                    {tabs.map((item, index) => {
                         return (
-                            // <div className='w-full' key={`${item.name}${index}`}>
+                            <div className='w-full' key={`${item.name}${index}`}>
                                 <List title={item.name} list={item.subs} active={activeTab.tab} />
-                            // </div>
+                            </div>
                         )
                     })}
-                    
+
                 </div>
-                <div className={`${dashboard["main-section"]} grow`}></div>
+                <div className={`${dashboard["main-section"]}`}>
+                    {children}
+                    {/* <div className='w-[170%] h-[1000px] ml-[20px] bg-[green]'></div> */}
+                </div>
             </div>
         </main>
     )
