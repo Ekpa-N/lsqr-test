@@ -1,0 +1,87 @@
+%scrollbar {
+    &::-webkit-scrollbar {
+        width: 3px;
+        height: 3px;
+    }
+
+    &::-webkit-scrollbar-track {
+        box-shadow: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 55px;
+        background-color: #fff;
+    }
+
+    &:hover {
+
+        &::-webkit-scrollbar {
+            width: 3px;
+            height: 3px;
+        }
+
+
+        &::-webkit-scrollbar-track {
+            box-shadow: gray;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 55px;
+            background-color: $primary-color;
+        }
+    }
+}
+
+%users-table-header {
+    th {        
+        // border: 1px solid blue;
+        button {
+            text-transform: uppercase;
+            text-align: left;
+            font-weight: 600;
+            color: $primary-font-color;
+            font-size: 12px;
+            font-style: normal;
+            line-height: normal;
+            padding: 0;
+            display: flex;
+            gap: 5px;
+
+            div {
+                position: relative;
+                width: 15px;
+                height: 15px;
+            }
+
+        }
+    }
+    
+    .org {
+        width: 111px;        
+    }
+
+    .username {
+        width: 90px;
+    }
+
+    .email {
+        width: 60px;
+    }
+    
+    .phone {
+        width: 120px;
+    }
+
+    .date {
+        width:100px;
+    }
+
+    .status {
+        width: 67px;
+    }
+
+    .more {
+        width: 20px;
+    }
+
+}

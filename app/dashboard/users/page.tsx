@@ -6,7 +6,12 @@ import Inputer from "@/components/Inputer"
 import Link from "next/link"
 import Paginator from "@/components/Paginator"
 import axios from "axios"
-
+import Selector from "@/components/Selector"
+import { perPage } from '@/constants'
+import TableHolder from "@/components/TableHolder"
+import { usersTableHeaders } from "@/constants/tableMax"
+import Row from "@/components/TableRow"
+import { formatDate } from "@/constants/helpers"
 
 
 export default function Users() {
@@ -14,8 +19,9 @@ export default function Users() {
     const [currentItems, setCurrentItems] = useState<[]>([])
     const [pageCount, setPageCount] = useState<number>(0)
     const [itemOffset, setItemOffset] = useState<number>(0)
-    const [itemsPerPage, setItemsPerPage] = useState<number>(20)
+    const [itemsPerPage, setItemsPerPage] = useState<number>(10)
     const [currentPage, setCurrentPage] = useState<number>(0)
+    const [detail, setActiveDetail] = useState<number | "">("")
     // const endOffset = itemOffset + itemsPerPage;
     // const currentItems = data.slice(itemOffset, endOffset);
     // const pageCount = Math.ceil(data.length / itemsPerPage);
@@ -62,23 +68,68 @@ export default function Users() {
         const newOffset = (event.selected * itemsPerPage) % userArray.length;
         setItemOffset(newOffset);
     };
+
+    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setItemsPerPage(Number(e.currentTarget.value))
+    }
+
+    const openDetail = (index: any) => {
+        // debugger
+       if (typeof(index) == "number") {
+        setActiveDetail(index)
+        return
+       }
+       setActiveDetail("")
+    }
     return (
         <main className={`${userstyles.main}`}>
+
             <h2 className={`${userstyles["page-title"]}`}>
                 Users
             </h2>
 
-            <div className={`${userstyles["card-holder"]}`}>
+            {/* <div className={`${userstyles["card-holder"]}`}>
                 <div className={`${userstyles.card}`}></div>
                 <div className={`${userstyles.card}`}></div>
                 <div className={`${userstyles.card}`}></div>
                 <div className={`${userstyles.card}`}></div>
-            </div>
+            </div> */}
 
-            <div className={`${userstyles["table-container"]}`}>
-                <div className="h-[30px] border border-[green] w-[300%]"></div>
-            </div>
-            <Paginator handleClick={handlePageClick} count={pageCount} currentPage={currentPage} />
+            <TableHolder>
+                <thead>
+                    <tr>
+                        {usersTableHeaders.map((header: string, index: number) => {
+                            if (header == "") {
+                                return (
+                                    <th key={index}>
+                                        <div className="w-[50px]"></div>                                        
+                                    </th>
+                                )
+                            }
+                            return (
+                                <th key={index}>
+                                    <button>
+                                        <h2>
+                                            {header}
+                                        </h2>
+                                        <div>
+                                            <ImageHolder filling={true} src="../images/dashboard/filter-results-button.svg" />
+                                        </div>
+                                    </button>
+                                </th>
+                            )
+                        })}
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {currentItems.map((user: any, index: number)=>{
+                        return <Row index={index} detail={detail} openDetail={openDetail} date={formatDate(user.registered)} email={user.email} phone={user.phone} status={user.status} username={user.username} organization={user.organization} table="users" />
+                    })}                  
+                </tbody>
+            </TableHolder>
+
+            <Paginator selectOptions={perPage} selectValue={itemsPerPage} handleSelectChange={handleSelectChange} handleClick={handlePageClick} count={pageCount} currentPage={currentPage} />
         </main>
     )
 }

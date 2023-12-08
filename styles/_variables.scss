@@ -9,4 +9,29 @@ $primary-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.04);
 $top-bar-shadow: 3px 0px 20px 0px rgba(0, 0, 0, 0.04);
 $card-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
 $card-border: 1px solid rgba(33, 63, 125, 0.06);
-$paginator-tab: rgba(33, 63, 125, 0.10)
+$paginator-tab: rgba(33, 63, 125, 0.10);
+$blacklisted: rgba(228, 3, 59, 0.1);
+$blacklisted-font: #E4033B;
+$active: rgba(57, 205, 98, 0.06);
+$active-font: #39CD62;
+$pending: rgba(233, 178, 0, 0.1);
+$pending-font: #E9B200;
+$inactive: rgba(84, 95, 125, 0.06);
+
+
+@mixin standard-font($size, $weight, $color) {
+    color: $color;
+    font-size: $size;
+    font-style: normal;
+    font-weight: $weight;
+    line-height: normal;
+}
+
+@mixin user-status ($bg){
+    z-index: 3;
+    padding: 7px 13px;
+    background-color:$bg;
+    border-radius: 100px;
+    text-align: center;      
+}
+

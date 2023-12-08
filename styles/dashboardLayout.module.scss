@@ -1,4 +1,11 @@
-@use 'variables';
+@import 'variables';
+@import 'table';
+
+.main-body {
+    @extend %scrollbar;
+    width: 100vw;
+    height: 100vh;
+}
 
 .main {
     display: flex;
@@ -36,7 +43,7 @@
                 height: 7px;
                 border-radius: 10px;
                 width: 100%;
-                background-color: variables.$primary-color;
+                background-color: $primary-color;
             }
         }
     }
@@ -49,20 +56,17 @@
         // overflow: auto;
 
         .side-bar {
-            width: 283px;
+            @extend %scrollbar;
+            min-width: 283px;
             height: 100%;
-            box-shadow: variables.$primary-shadow;
+            box-shadow: $primary-shadow;
             overflow: auto;
             z-index: 2;
             background-color: #fff;
             transition: all linear 1s;
 
             .organization {
-                color: variables.$primary-color;
-                font-size: 16px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: normal;
+                @include standard-font(16px, 400, $primary-color);
                 margin-left: 5px;
             }
 
@@ -74,11 +78,7 @@
                 margin-top: 41px;
 
                 .section-title {
-                    color: variables.$primary-font-color;
-                    font-size: 12px;
-                    font-style: normal;
-                    font-weight: 500;
-                    line-height: normal;
+                    @include standard-font(12px, 500, $primary-font-color);
                     margin-left: 30px;
                     width: fit-content;
                 }
@@ -102,12 +102,13 @@
         }
 
         .main-section {
-            background-color: variables.$secondary-bg;
+            @extend %scrollbar;
+            background-color: $secondary-bg;
             z-index: 1;
             overflow-y: auto;
             overflow-x: hidden;
             display: flex;
-            border: 3px solid yellow;
+            // border: 3px solid yellow;
             flex-grow: 1;
             padding: 0 0 50px 0;
             height: 100%;

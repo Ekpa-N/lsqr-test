@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react"
 import ImageHolder from "@/components/ImageHolder"
 import dashboard from "@/styles/dashboardLayout.module.scss"
 import List from '@/components/SectionList'
+import {isMobile} from 'react-device-detect'
 
 type mobileState = {
     isMobile: any,
@@ -19,7 +20,7 @@ type active = {
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
     const [mobileView, setMobileView] = useState<mobileState>({ isMobile: undefined })
-    const [sideBar, setSideBar] = useState<sideBar>({ isSideBar: "left-[0]" })
+    const [sideBar, setSideBar] = useState<sideBar>({ isSideBar: "left-[-283px]" })
     const [activeTab, setActiveTab] = useState<active>({ tab: "Users" })
 
 
@@ -35,7 +36,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             } else if (isClickedOutsideDiv) {
                 setSideBar({ isSideBar: "left-[-283px]" });
             }
-        }, 300),
+        }, 200),
         []
     );
 
@@ -50,10 +51,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             }
         }
         
-        if (window.innerWidth < 700) {
+        if (isMobile) {
             window.addEventListener('click', debouncedCloseSideBar)
         }
-        if (window.innerWidth > 700) {
+        if (!isMobile) {
             window.addEventListener('resize', windowChecker)
         }
         return (() => {
@@ -130,7 +131,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 </div>
                 <div className={`${dashboard["main-section"]}`}>
                     {children}
-                    {/* <div className='w-[170%] h-[1000px] ml-[20px] bg-[green]'></div> */}
                 </div>
             </div>
         </main>

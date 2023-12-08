@@ -1,4 +1,5 @@
-@use 'variables';
+@import 'variables';
+@import 'table';
 
 .main {
     width: 100%;
@@ -6,16 +7,12 @@
     display: flex;
     flex-direction: column;
     padding: 0 20px;
-    // gap: 40px;
-    // border: 2px solid orange;
     margin-top: 160px;
 
+
+
     .page-title {
-        color: variables.$primary-color;
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
+        @include standard-font(24px, 500, $primary-color);
     }
 
     .card-holder {
@@ -25,31 +22,94 @@
         flex-wrap: wrap;
         gap: 10px;
         margin-top: 40px;
-        
+
         .card {
             display: flex;
             background-color: #fff;
             // background-color: green;
             flex-direction: column;
-            box-shadow: variables.$card-shadow;
+            box-shadow: $card-shadow;
             width: 100%;
             height: 160px;
             border-radius: 4px;
-            border: variables.$card-border;
+            border: $card-border;
         }
     }
-    
+
     .table-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        @extend %scrollbar;
         width: 100%;
-        height: 640px;
-        // height: 240px;
-        overflow-x: auto;
-        border: 2px solid orange;
+        // height: 640px;
+        height: 240px;
+        overflow: auto;
+        // border: 2px solid orange;
         margin-top: 40px;
-        
+        box-shadow: $card-shadow;
+        background-color: #fff;
+        border-radius: 4px;
+
+        .table {
+            @extend %users-table-header;
+            width: 100%; 
+            height: fit-content;   
+            
+            .row {
+                @include standard-font(14px, 400, $primary-font-color);
+                height: 60px;
+                border-bottom: 1px solid $paginator-tab;
+                position: relative;
+
+                .details {
+                    width: 180px;
+                    height: 130px;
+                    position: absolute;
+                    top: 9px;
+                    border-radius: 4px;
+                    background-color: #fff;
+                    right: -26px;
+                    // display: flex;
+                    flex-direction: column;
+                    box-shadow: $top-bar-shadow;
+                    z-index: 5;
+                }
+                
+                .active {
+                    @include standard-font(14px, 400, $active-font);
+                    @include user-status($active)
+                }
+                
+                .blacklisted {
+                    @include standard-font(14px, 400, $blacklisted-font);
+                    @include user-status($blacklisted)
+                }
+                
+                .pending {
+                    @include standard-font(14px, 400, $pending-font);
+                    @include user-status($pending)
+                }
+                .inactive {
+                    @include standard-font(14px, 400, $primary-font-color);
+                    @include user-status($inactive)
+                }
+
+                button {
+                    height: 17px;
+                    width: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    margin-left: auto;
+
+                    div {
+                        background-color: $primary-font-color;
+                        width: 3px;
+                        height: 3px;
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
+
     }
 
     .paginator {
@@ -60,6 +120,8 @@
         // border: 2px solid blue;
 
 
+
+
         .display-count {
             display: flex;
             gap: 10px;
@@ -68,28 +130,37 @@
             justify-content: center;
 
             .showing {
-                color: variables.$primary-font-color;
-                font-size: 14px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: normal;
+                @include standard-font(14px, 400, $primary-font-color);
             }
-            
+
             .count {
                 display: flex;
                 justify-content: space-around;
-                background-color: variables.$paginator-tab;
+                background-color: $paginator-tab;
                 border-radius: 4px;
                 width: 80px;
                 height: 30px;
+
+                .selector {
+                    @include standard-font(14px, 400, $primary-font-color);
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+
+                    .select {
+                        display: flex;
+                        width: 100%;
+                        background-color: inherit;
+                        padding: 0 12px;
+                        font-weight: 500;
+                        outline-color: $primary-color;
+                    }
+
+                }
             }
-            
+
             .total {
-                color: variables.$primary-font-color;
-                font-size: 14px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: normal;
+                @include standard-font(14px, 400, $primary-font-color);
             }
 
         }
@@ -101,7 +172,7 @@
     height: 24px;
     border-radius: 4px;
     position: relative;
-    background-color: variables.$paginator-tab;
+    background-color: $paginator-tab;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -113,7 +184,8 @@
     }
 }
 
-@media only screen and (min-width: 700px) {
+
+@media only screen and (min-width: 900px) {
     .main {
         .paginator {
             // border: 1px solid green;
@@ -137,14 +209,6 @@
     .main {
         padding: 0 20px;
 
-        .page-title {
-            color: variables.$primary-color;
-            font-size: 24px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: normal;
-        }
-
         .card-holder {
             display: flex;
             flex-direction: row;
@@ -163,14 +227,6 @@
 @media only screen and (min-width: 1000px) {
     .main {
         padding: 0 20px;
-
-        .page-title {
-            color: variables.$primary-color;
-            font-size: 24px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: normal;
-        }
 
         .card-holder {
             flex-wrap: nowrap;
