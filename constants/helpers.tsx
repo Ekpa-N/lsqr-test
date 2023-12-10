@@ -1,3 +1,6 @@
+'use client'
+import {useState, useEffect, useCallback} from 'react'
+
 export function formatDate(date: string): string {
     const newDate = date.replace(' ', '')
     const inputDate = new Date(newDate);
@@ -14,3 +17,5 @@ export function formatDate(date: string): string {
     const formattedDate: string = new Intl.DateTimeFormat('en-US', options).format(inputDate);
     return formattedDate.replace("at", " ");
 }
+
+

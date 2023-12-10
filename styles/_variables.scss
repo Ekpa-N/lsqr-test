@@ -27,11 +27,83 @@ $inactive: rgba(84, 95, 125, 0.06);
     line-height: normal;
 }
 
-@mixin user-status ($bg){
+@mixin user-status ($bg) {
     z-index: 3;
     padding: 7px 13px;
-    background-color:$bg;
+    background-color: $bg;
     border-radius: 100px;
-    text-align: center;      
+    text-align: center;
 }
 
+@mixin primary-icon {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    border-radius: 0;
+}
+
+@mixin custom-icon ($height, $width) {
+    width: $width;
+    height: $height;
+    position: relative;
+    border-radius: 0;
+}
+
+@mixin page-button ($color) {
+    width: 170px;
+    height: 40px;
+    text-align: center;
+    color: $color;
+    border: 1px solid $color;
+    border-radius: 8px;
+
+    &:hover {
+        color: #fff;
+        background: $color;
+    }
+}
+
+@mixin profile-details ($border-right, $border-bottom, $padding) {
+    display: flex;
+    flex-direction: column;
+    padding: $padding;
+    height: 80px;
+    gap: 12px;
+    justify-content: center;
+    border-right: $border-right;
+    border-bottom: $border-bottom;
+}
+
+
+@mixin profile-tabs () {
+    @include standard-font(16px, 400, rgba(0, 0, 0, 0.80));
+    padding: 0 0px 10px;
+    border-bottom: 2px solid;
+    border-color: #fff;
+    // border: 1px solid black;
+    width: 150px;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+        color: $secondary-color;
+        border-color: $secondary-color;
+
+    }
+}
+
+@mixin scroller ($size, $shadow, $color) {
+    &::-webkit-scrollbar {
+        width: $size;
+        height: $size;
+    }
+
+    &::-webkit-scrollbar-track {
+        box-shadow: $shadow;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 55px;
+        background-color: $color;
+    }
+}

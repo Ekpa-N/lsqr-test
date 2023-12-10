@@ -12,9 +12,11 @@ import TableHolder from "@/components/TableHolder"
 import { usersTableHeaders } from "@/constants/tableMax"
 import Row from "@/components/TableRow"
 import { formatDate } from "@/constants/helpers"
+import { redirect, useRouter } from 'next/navigation'
 
 
 export default function Users() {
+    const router = useRouter()
     const [users, setUsers] = useState<{ userData: [] }>({ userData: [] })
     const [currentItems, setCurrentItems] = useState<[]>([])
     const [pageCount, setPageCount] = useState<number>(0)
@@ -22,6 +24,7 @@ export default function Users() {
     const [itemsPerPage, setItemsPerPage] = useState<number>(10)
     const [currentPage, setCurrentPage] = useState<number>(0)
     const [detail, setActiveDetail] = useState<number | "">("")
+    const [viewUser, setViewUser] = useState<{ user: {}, isView: boolean }>({ user: {}, isView: false })
     // const endOffset = itemOffset + itemsPerPage;
     // const currentItems = data.slice(itemOffset, endOffset);
     // const pageCount = Math.ceil(data.length / itemsPerPage);
@@ -33,7 +36,7 @@ export default function Users() {
 
             while (attempts < maxAttempts) {
                 try {
-                    const response = await axios.get("https://run.mocky.io/v3/c1621f11-9d49-4f9a-9940-15640c3767f5");
+                    const response = await axios.get(process.env.api as string);
                     setUsers({ ...users, userData: response.data });
                     break;
                 } catch (error) {
@@ -73,14 +76,35 @@ export default function Users() {
         setItemsPerPage(Number(e.currentTarget.value))
     }
 
-    const openDetail = (index: any) => {
+    const openDetail = (e: React.MouseEvent<any, MouseEvent>, index?: any) => {
         // debugger
-       if (typeof(index) == "number") {
-        setActiveDetail(index)
-        return
-       }
-       setActiveDetail("")
+        e.stopPropagation()
+
+        const eventTarget = e.target as HTMLElement
+        if (
+            typeof index === "number" &&
+            (eventTarget.classList.contains("details-button") ||
+                (eventTarget instanceof HTMLButtonElement && eventTarget.classList.contains("details-button")))
+        ) {
+            setActiveDetail(index)
+            return
+        }
+        setActiveDetail("")
     }
+
+    const openUser = (userId?: string): void => {
+        const storedUsersString = localStorage.getItem("users");
+
+        if (storedUsersString) {
+            const usersArray = JSON.parse(storedUsersString)
+            const activeUser = usersArray.find((user: {_id: string}) => user._id == userId);
+            localStorage.setItem("activeUser", JSON.stringify(activeUser))
+            router.push('/dashboard/user/'+activeUser.id)
+        } else {
+            console.error("No users found in local storage");
+        }
+    }
+    
     return (
         <main className={`${userstyles.main}`}>
 
@@ -102,7 +126,7 @@ export default function Users() {
                             if (header == "") {
                                 return (
                                     <th key={index}>
-                                        <div className="w-[50px]"></div>                                        
+                                        <div className="w-[50px]"></div>
                                     </th>
                                 )
                             }
@@ -123,9 +147,9 @@ export default function Users() {
                 </thead>
 
                 <tbody>
-                    {currentItems.map((user: any, index: number)=>{
-                        return <Row index={index} detail={detail} openDetail={openDetail} date={formatDate(user.registered)} email={user.email} phone={user.phone} status={user.status} username={user.username} organization={user.organization} table="users" />
-                    })}                  
+                    {currentItems.map((user: any, index: number) => {
+                        return <Row id={user._id} rowFunctions={{view: openUser}} index={index} detail={detail} openDetail={openDetail} date={formatDate(user.registered)} email={user.email} phone={user.phone} status={user.status} username={user.username} organization={user.organization} table="users" />
+                    })}
                 </tbody>
             </TableHolder>
 

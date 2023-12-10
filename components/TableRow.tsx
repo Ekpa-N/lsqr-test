@@ -1,6 +1,8 @@
 "use client"
-
+import { useEffect, useState, useCallback } from 'react'
 import userstyles from "@/styles/usersPage.module.scss"
+import { detailsOptions } from '@/constants/menuTabs'
+import ImageHolder from './ImageHolder'
 
 type RowTypes = {
     organization?: string;
@@ -12,10 +14,30 @@ type RowTypes = {
     table: string;
     detail?: any;
     index?: number | 0;
-    openDetail: (index: number | 0)=> void
+    openDetail: (e:React.MouseEvent<any, MouseEvent>, index?: number | 0 | "") => void;
+    rowFunctions: {
+        [key: string]: (id: string)=>void;
+    };
+    id: string;
 }
 
-const Row: React.FC<RowTypes> = ({ organization, username, email, phone, date, status, table, detail, index, openDetail }) => {
+const Row: React.FC<RowTypes> = ({ organization, username, email, phone, date, status, table, detail, index: userIndex, openDetail, rowFunctions, id }) => {
+
+    useEffect(()=>{
+        const handleWindowClick = (e: MouseEvent) => {
+            if (openDetail) {
+              openDetail(e as unknown as React.MouseEvent<any, MouseEvent>);
+            }
+      
+            // Additional logic or actions based on the window click event
+          };
+        window.addEventListener("click", handleWindowClick)
+        
+        return ()=> {
+            window.removeEventListener("click", handleWindowClick)            
+        }
+    },[])
+
 
     function statusRow(status: string) {
         if (status == "Blacklisted") {
@@ -41,19 +63,30 @@ const Row: React.FC<RowTypes> = ({ organization, username, email, phone, date, s
                 <td>{email}</td>
                 <td>{phone}</td>
                 <td>{date}</td>
-                <td >
-                <div className={`${statusRow(status || "")}`}>
-                    {status}
-                </div>
+                <td>
+                    <div className={`${statusRow(status || "")}`}>
+                        {status}
+                    </div>
                 </td>
                 <td>
-                    <button onClick={()=>{openDetail(index || 0)}} className={`${userstyles["row-button"]}`}>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                    <button onClick={(e) => { openDetail(e, userIndex || 0) }} className={`${userstyles["row-button"]} details-button`}>
+                        <div className='details-button'></div>
+                        <div className='details-button'></div>
+                        <div className='details-button'></div>
                     </button>
                 </td>
-                <div className={`${userstyles.details} ${detail === index && typeof(index) === "number"? "flex" : "hidden"}`}></div>
+                <div id='details' className={`${userstyles.details} ${detail === userIndex && typeof (userIndex) === "number" ? "flex" : "hidden"} className='details-button'`}>
+                    {detailsOptions.map(({type, img, name}, index)=> {
+                        return(
+                            <button onClick={()=>{rowFunctions[type](id)}}>
+                                <div className={`${userstyles.icon}`}>
+                                    <ImageHolder filling={true} src={img} />
+                                </div>
+                                <h2>{name}</h2>
+                            </button>
+                        )
+                    })}
+                </div>
             </tr>
         )
     }

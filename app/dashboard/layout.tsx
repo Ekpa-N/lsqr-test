@@ -106,16 +106,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 <div id="side-bar" className={`${dashboard["side-bar"]} ${mobileView.isMobile ? "absolute" : "relative"} ${sideBar.isSideBar}`}>
                     <li className='flex items-center ml-[30px] mt-[139px]'>
                         <div className='w-[16px] h-[16px] relative'>
-                            <ImageHolder filling={true} src="../images/dashboard/organization.svg" />
+                            <ImageHolder filling={true} src="../../images/dashboard/organization.svg" />
                         </div>
                         <h2 className={`${dashboard["organization"]}`}>Switch Organization</h2>
                         <div className='w-[14px] h-[14px] relative ml-[5px]'>
-                            <ImageHolder filling={true} src="../images/dashboard/caret-down.svg" />
+                            <ImageHolder filling={true} src="../../images/dashboard/caret-down.svg" />
                         </div>
                     </li>
                     <li className='flex items-center ml-[30px] mt-[39px]'>
                         <div className='w-[16px] h-[16px] relative'>
-                            <ImageHolder filling={true} src="../images/dashboard/home-icon.svg" />
+                            <ImageHolder filling={true} src="../../images/dashboard/home-icon.svg" />
                         </div>
                         <h2 className={`${dashboard["organization"]}`}>Dashboard</h2>
                     </li>
