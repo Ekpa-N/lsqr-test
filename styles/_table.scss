@@ -35,6 +35,9 @@
 %users-table-header {
     th {        
         // border: 1px solid blue;
+        padding: 0 5px 0 0;
+        
+
         button {
             text-transform: uppercase;
             text-align: left;
@@ -57,31 +60,31 @@
     }
     
     .org {
-        width: 111px;        
+        // width: 111px;        
     }
 
     .username {
-        width: 90px;
+        // width: 90px;
     }
 
     .email {
-        width: 60px;
+        // width: 60px;
     }
     
     .phone {
-        width: 120px;
+        // width: 120px;
     }
 
     .date {
-        width:100px;
+        // width:100px;
     }
 
     .status {
-        width: 67px;
+        // width: 67px;
     }
 
     .more {
-        width: 20px;
+        // width: 20px;
     }
 
 }

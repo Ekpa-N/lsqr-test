@@ -3,7 +3,7 @@ const path = require('path')
 
 const nextConfig = {
     env: {
-        api: "https://run.mocky.io/v3/3bb0f1e3-e8e7-4425-a500-5f61398b0b02"
+        api: "https://run.mocky.io/v3/7babd0ca-8fe9-4057-8be3-0635005a3440"
     },
     sassOptions: {
         includePaths: [path.join(__dirname, 'styles')],

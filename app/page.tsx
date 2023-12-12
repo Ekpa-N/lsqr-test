@@ -34,7 +34,7 @@ export default function Home() {
     setPasswordView({...passwordView, isHidden:true, inputType:"password"})
   }
 
-  function handleChange(e:React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     setLoginDetails({...loginDetails, [e.currentTarget.name]:e.currentTarget.value})
   }
   return (
@@ -56,8 +56,8 @@ export default function Home() {
             <h3>Enter details to login.</h3>
           </div>
           <div className={`${home["input-section"]}`}>
-            <Inputer handler={handleChange} name="email" classname={home.inputer} placeholder="Email" />
-            <Inputer handler={handleChange} name="password" classname={home.inputer} placeholder="Password" buttonClass={home["password-reveal"]} inputType={passwordView.inputType} operation={handlePasswordView} displayState={passwordView.isHidden}/>
+            <Inputer handler={handleChange} value={loginDetails.email} name="email" classname={home.inputer} placeholder="Email" />
+            <Inputer handler={handleChange} value={loginDetails.password} name="password" classname={home.inputer} placeholder="Password" buttonClass={home["password-reveal"]} inputType={passwordView.inputType} operation={handlePasswordView} displayState={passwordView.isHidden}/>
           </div>
 
           <Link href={"#"}>

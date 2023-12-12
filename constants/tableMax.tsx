@@ -5,13 +5,34 @@ const perPageView  = [
 ]
 
 export const usersTableHeaders = [
-    "organization",
-    "username",
-    "email",
-    "phone number",
-    "date joined",
-    "status",
-    ""
+    {
+        name: "organization",
+        filterMargin: "organization"
+    },
+    {
+        name: "username",
+        filterMargin: "username"
+    },
+    {
+        name: "email",
+        filterMargin: "email"
+    },
+    {
+        name: "phone number",
+        filterMargin: "phone"
+    },
+    {
+        name: "date joined",
+        filterMargin: "joined"
+    },
+    {
+        name: "status",
+        filterMargin: "status"
+    },
+    {
+        name: "",
+        filterMargin: ""
+    }
 ]
 
 export default perPageView

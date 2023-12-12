@@ -28,8 +28,6 @@ const Row: React.FC<RowTypes> = ({ organization, username, email, phone, date, s
             if (openDetail) {
               openDetail(e as unknown as React.MouseEvent<any, MouseEvent>);
             }
-      
-            // Additional logic or actions based on the window click event
           };
         window.addEventListener("click", handleWindowClick)
         

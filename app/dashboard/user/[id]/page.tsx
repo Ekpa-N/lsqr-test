@@ -6,10 +6,17 @@ import TierStars from "@/components/TierStars"
 import { profileTabs } from "@/constants/menuTabs"
 import { useRouter } from "next/navigation"
 import GeneralDetails from "@/components/userInfoComponents/GeneralDetails"
+import Loans from "@/components/userInfoComponents/Loans"
+import Documents from "@/components/userInfoComponents/Documents"
+import AppAndSystem from "@/components/userInfoComponents/AppAndSystem"
+import Savings from "@/components/userInfoComponents/Savings"
+
+
 
 
 export default function User() {
     const router = useRouter()
+    const [activeTab, setActiveTab] = useState<string>("General Details")
     const [user, setUser] = useState<{
         picture: string;
         firstname: string;
@@ -54,7 +61,14 @@ export default function User() {
             twitter: string;
             facebook: string;
             instagram: string;
-        };
+        },
+        guarantors: [{
+            name: string;
+            email: string;
+            phone: string;
+            relationship: string;
+        }]
+
     }>({
         personalInfo: {
             name: "",
@@ -79,12 +93,20 @@ export default function User() {
             twitter: "",
             facebook: "",
             instagram: ""
-        }
+        },
+        guarantors: [{
+            name: "",
+            email: "",
+            phone: "",
+            relationship: "",
+        }]
     })
+    
 
     useEffect(() => {
         const currentUser = localStorage.getItem("activeUser")
         const parsedUserObject = JSON.parse(currentUser as string)
+        const theGuarantors = parsedUserObject.guarantors.map((guarantor:{}) => guarantor)
         // console.log("duration: ",parsedUserObject.duration)
         setUser(JSON.parse(currentUser as string))
         setGeneralDetails({
@@ -113,9 +135,14 @@ export default function User() {
                 twitter: `${parsedUserObject.twitter}`,
                 facebook: `${parsedUserObject.facebook}`,
                 instagram: `${parsedUserObject.instagram}`
-            }
+            },
+            guarantors: theGuarantors
         })
     }, [])
+
+    const handleActiveTab = (tab: string): void => {
+        setActiveTab(tab)
+    }
 
     return (
         <main className={`${userstyles.main}`}>
@@ -140,9 +167,7 @@ export default function User() {
 
             <div className={`${userstyles["user-profile"]}`}>
                 <div className={`${userstyles["profile-details"]}`}>
-                    <div style={{ backgroundImage: `url(${user.picture})` }} className={`${userstyles.avatar}`}>
-                        {/* <ImageHolder filling={true} src={`${user.picture}`} /> */}
-                    </div>
+                    <div style={{ backgroundImage: `url(${user.picture})` }} className={`${userstyles.avatar}`}>                    </div>
                     <div className={`${userstyles["name-section"]}`}>
                         <h2 className={`${userstyles["user-name"]}`}>{`${user.firstname} ${user.lastname}`}</h2>
                         <h2 className={`${userstyles["user-id"]}`}>{user._id}</h2>
@@ -159,13 +184,17 @@ export default function User() {
                 <ul className={`${userstyles["profile-tabs-holder"]}`}>
                     <div className={`${userstyles["inner-holder"]}`}>
                         {profileTabs.map((tab, index) => {
-                            return <li key={index} className={`${userstyles["profile-tabs"]}`}>{tab.name}</li>
+                            return <li onClick={()=>{handleActiveTab(tab.name)}} key={index} className={`${userstyles["profile-tabs"]} ${activeTab == tab.name ? userstyles["active"] : ""}`}>{tab.name}</li>
                         })}
                     </div>
                 </ul>
             </div>
 
-            <GeneralDetails {...generalDetails} />
+            {activeTab === "General Details" && <GeneralDetails {...generalDetails} />}
+            {activeTab === "Savings" && <Savings />}
+            {activeTab === "Documents" && <Documents />}
+            {activeTab === "Loans" && <Loans />}
+            {activeTab === "App and System" && <AppAndSystem />}
         </main>
     )
 }

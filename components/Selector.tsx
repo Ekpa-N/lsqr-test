@@ -10,7 +10,7 @@ type SelectorProps = {
 
 const Selector: React.FC<SelectorProps> = ({name, handler, selectOptions, value  }: SelectorProps) => {
     return (
-        <div className={`${userstyles.selector}`}>
+        <div className={`${userstyles["paginate-selector"]}`}>
             <select onChange={(e)=>{handler?.(e)}} value={value} className={`${userstyles.select}`}>
                 {selectOptions.map((option, index) => {
                     if (option == value) {

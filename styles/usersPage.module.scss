@@ -18,14 +18,16 @@
         padding: 30px 30px 46px;
         display: flex;
         flex-direction: column;
-        margin-top: 30px;   
-        
+        margin-top: 30px;
+        min-height: 400px;
+
         .info-card {
             display: flex;
             flex-direction: column;
             gap: 30px;
             // border: 1px solid black;
             padding: 30px 0;
+
             &:nth-child(n+2) {
                 border-top: 1px solid $paginator-tab;
             }
@@ -38,6 +40,7 @@
                 display: flex;
                 flex-direction: column;
                 gap: 20px;
+                // border: 1px solid blue;
 
 
                 .detail {
@@ -46,12 +49,12 @@
                     gap: 10px;
 
                     .detail-title {
-                        @include standard-font(12px, 400, $primary-color); 
-                        text-transform: uppercase;                       
+                        @include standard-font(12px, 400, $primary-color);
+                        text-transform: uppercase;
                     }
-                    
+
                     .detail-body {
-                        @include standard-font(16px, 500, $primary-color);                        
+                        @include standard-font(16px, 500, $primary-color);
                     }
                 }
             }
@@ -82,6 +85,11 @@
             .profile-tabs {
                 @include profile-tabs
             }
+
+            .profile-tabs.active {
+                color: $secondary-color;
+                border-color: $secondary-color;
+            }
         }
 
 
@@ -101,44 +109,45 @@
                 // background: black;
                 position: relative;
             }
-    
+
             .id {
                 display: flex;
-    
+
             }
-    
+
             .name-section {
-                @include profile-details(none, 1px solid $border, 30px 0 );
+                @include profile-details(none, 1px solid $border, 30px 0);
                 margin-top: 20px;
-    
+
                 .user-name {
                     @include standard-font(22px, 500, $primary-color);
                 }
-    
+
                 .user-id {
                     @include standard-font(14px, 400, $primary-color);
                 }
             }
-    
+
             .tier-section {
-                @include profile-details(none, 1px solid $border, 30px 0 );
-    
+                @include profile-details(none, 1px solid $border, 30px 0);
+
                 .title {
                     @include standard-font(14px, 500, $primary-color);
                 }
-    
+
                 .tier {
                     display: flex;
                     gap: 4px;
                 }
             }
-    
+
             .user-balance {
-                @include profile-details(none, none, 30px 0 );
+                @include profile-details(none, none, 30px 0);
 
                 .balance {
                     @include standard-font(22px, 500, $primary-color)
                 }
+
                 .bank-info {
                     @include standard-font(12px, 400, $primary-color)
                 }
@@ -212,15 +221,110 @@
 
     .table-container {
         @extend %scrollbar;
+        position: relative;
         width: 100%;
-        // height: 640px;
-        height: 240px;
+        height: 680px;
+        // padding-right: 30px;
+        // height: 240px;
         overflow: auto;
         // border: 2px solid orange;
         margin-top: 40px;
         box-shadow: $card-shadow;
         background-color: #fff;
         border-radius: 4px;
+
+        .filter-modal {
+            background-color: #fff;
+            width: 270px;
+            min-height: 600px;
+            border-radius: 4px;
+            border: 1px solid $border;
+            box-shadow: $card-shadow;
+            position: absolute;
+            top: 60px;
+            flex-direction: column;
+            padding: 30px 20px 20px;
+            gap: 20px;
+
+            .filter-button {
+                @include filter-buttons($secondary-color, $secondary-color);
+                @include standard-font(14px, 600, #fff);
+            }
+            .reset-button {
+                @include filter-buttons(#fff, $primary-color);
+                @include standard-font(14px, 600, $primary-color);
+            }
+
+            .filter {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                // border: 1px solid green;
+
+                .name {
+                    @include standard-font(14px, 500, $primary-color);
+                    text-transform: capitalize;
+                }
+                
+                .input-holder {
+                    width: 100%;
+                    height: 40px;
+                    border-radius: 8px;
+                    // background: #fff;                
+                    padding: 0px 13px 0px 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border:1px solid $border;
+
+                    input {
+                        @include standard-font(14px, 400, $primary-font-color);
+                        @include filter-input;
+                        // border: 1px solid black; 
+                        outline: none; 
+                        width: 100%;  
+                        
+                        &::placeholder {
+                            text-transform: capitalize;
+                        }
+                    }
+
+                }
+
+                select {
+                    @include scroller(2px, none, $primary-color);
+                    @include standard-font(14px, 400, $primary-font-color);
+                    option {
+                        @include standard-font(14px, 400, $primary-font-color);
+                        
+                        &:hover {
+                            @include standard-font(14px, 400, #fff);
+                        }
+                    }
+                }
+            }
+        }
+
+        .username {
+            left: 160px;
+        }
+
+        .email {
+            left: 250px;
+        }
+
+        .phone {
+            left: 550px;
+        }
+
+        .joined {
+            left: 700px;
+        }
+
+        .status {
+            left: 805px;
+        }
+
 
         .table {
             @extend %users-table-header;
@@ -336,7 +440,7 @@
                 width: 80px;
                 height: 30px;
 
-                .selector {
+                .paginate-selector {
                     @include standard-font(14px, 400, $primary-font-color);
                     width: 100%;
                     height: 100%;
@@ -360,6 +464,8 @@
 
         }
     }
+
+
 }
 
 .page-select {
@@ -417,7 +523,7 @@
             .profile-details {
                 display: flex;
                 flex-direction: row;
-    
+
                 .avatar {
                     width: 100px;
                     height: 100px;
@@ -427,44 +533,45 @@
                     background-size: cover;
                     background: black;
                 }
-        
+
                 .id {
                     display: flex;
-        
+
                 }
-        
+
                 .name-section {
-                    @include profile-details(1px solid $border, none, 0 30px );
+                    @include profile-details(1px solid $border, none, 0 30px);
                     margin-top: 0;
-        
+
                     .user-name {
                         @include standard-font(22px, 500, $primary-color);
                     }
-        
+
                     .user-id {
                         @include standard-font(14px, 400, $primary-color);
                     }
                 }
-        
+
                 .tier-section {
-                    @include profile-details(1px solid $border, none, 0 30px  );
-        
+                    @include profile-details(1px solid $border, none, 0 30px);
+
                     .title {
                         @include standard-font(14px, 500, $primary-color);
                     }
-        
+
                     .tier {
                         display: flex;
                         gap: 4px;
                     }
                 }
-        
+
                 .user-balance {
-                    @include profile-details(none, none, 0 30px );
-    
+                    @include profile-details(none, none, 0 30px);
+
                     .balance {
                         @include standard-font(22px, 500, $primary-color)
                     }
+
                     .bank-info {
                         @include standard-font(12px, 400, $primary-color)
                     }

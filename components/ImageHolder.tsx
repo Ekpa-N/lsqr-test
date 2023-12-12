@@ -5,6 +5,7 @@ interface ImageHolderProps {
     alt?: string;
     sizing?: { width: number; height: number };
     filling?: boolean;
+    className?: string
 }
 
 const ImageHolder: React.FC<ImageHolderProps> = ({
@@ -12,18 +13,17 @@ const ImageHolder: React.FC<ImageHolderProps> = ({
     alt = 'image',
     sizing = { width: 0, height: 0 },
     filling = false,
+    className=""
 }: ImageHolderProps) => {
     return (
         <>
             <Image
                 src={src}
                 alt={alt}
-                // layout="responsive" // or specify your layout strategy
                 width={sizing.width}
                 height={sizing.height}
                 fill={filling}
-                // objectFit={filling ? 'cover' : 'contain'} // Adjust based on your needs
-                priority
+                className={className}
             />
         </>
     );

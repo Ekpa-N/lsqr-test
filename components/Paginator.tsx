@@ -12,11 +12,12 @@ type PaginateProps = {
     currentPage: number;
     selectOptions: number[];
     selectValue: number;
+    total: number;
     handleSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 
-const Paginator: React.FC<PaginateProps> = ({ handleClick, count, currentPage, selectOptions, selectValue, handleSelectChange }) => {
+const Paginator: React.FC<PaginateProps> = ({ handleClick, count, currentPage, selectOptions, selectValue, handleSelectChange, total }) => {
 
     return (
         <div className={`${userspage.paginator}`}>
@@ -25,7 +26,7 @@ const Paginator: React.FC<PaginateProps> = ({ handleClick, count, currentPage, s
                 <button className={`${userspage.count}`}>
                     <Selector handler={handleSelectChange} value={selectValue} selectOptions={selectOptions} />
                 </button>
-                <div className={`${userspage.total}`}> Out of 100</div>
+                <div className={`${userspage.total}`}> {`Out of ${total}`}</div>
             </div>
             <div>
                 <ReactPaginate
@@ -39,6 +40,7 @@ const Paginator: React.FC<PaginateProps> = ({ handleClick, count, currentPage, s
                     containerClassName="page-selector-container"
                     pageClassName='page'
                     activeClassName='activepage'
+                    forcePage={currentPage}
                 />
             </div>
         </div>

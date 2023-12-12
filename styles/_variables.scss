@@ -88,7 +88,6 @@ $inactive: rgba(84, 95, 125, 0.06);
     &:hover {
         color: $secondary-color;
         border-color: $secondary-color;
-
     }
 }
 
@@ -106,4 +105,22 @@ $inactive: rgba(84, 95, 125, 0.06);
         border-radius: 55px;
         background-color: $color;
     }
+}
+
+@mixin filter-input {
+    @include standard-font(14px, 400, $primary-font-color);
+    // text-transform: capitalize;
+    background-color: inherit;
+    width: 100%;
+}
+
+@mixin filter-buttons ($bg, $border) {
+    border-radius: 8px;
+    width: 98px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $border;
+    background-color: $bg;
 }

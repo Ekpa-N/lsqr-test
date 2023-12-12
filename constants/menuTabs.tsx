@@ -243,28 +243,61 @@ export const userDetails = [
             },
         ]
     },
-    // {
-    //     title:"Guarantor",
-    //     name:"guarantor",
-    //     subs: [
-    //         {
-    //             title:"full name",
-    //             body:"name"
-    //         },
-    //         {
-    //             title:"full name",
-    //             body:"name"
-    //         },
-    //         {
-    //             title:"full name",
-    //             body:"name"
-    //         },
-    //         {
-    //             title:"full name",
-    //             body:"name"
-    //         },
-    //     ]
-    // }
+    {
+        title:"Guarantor",
+        name:"guarantors",
+        subs: [
+            {
+                title:"full name",
+                body:"name"
+            },
+            {
+                title:"phone number",
+                body:"phone"
+            },
+            {
+                title:"email address",
+                body:"email"
+            },
+            {
+                title:"relationship",
+                body:"relationship"
+            },
+        ]
+    }
+]
+
+export const filters = [
+    {
+        name: "organization",
+        title: "organization",
+        type:"select",
+    },
+    {
+        name: "username",
+        title: "username",
+        type:"text",
+    },
+    {
+        name: "email",
+        title: "email",
+        type:"text",
+    },
+    {
+        name: "date",
+        title: "date",
+        type:"date",
+    },
+    {
+        name: "phone",
+        title: "phone number",
+        type:"text",
+    },
+    {
+        name: "status",
+        title: "status",
+        type:"select",
+    },
 ]
 
 export default tabs
