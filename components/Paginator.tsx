@@ -12,7 +12,7 @@ type PaginateProps = {
     currentPage: number;
     selectOptions: number[];
     selectValue: number;
-    total: number;
+    total: number | undefined;
     handleSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 

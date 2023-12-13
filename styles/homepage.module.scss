@@ -103,7 +103,7 @@
     border: 2px solid variables.$border;
     padding: 0 16px;
     align-items: center;
-    justify-content: space-between;
+    // justify-content: space-between;
 }
 
 .inputer {
@@ -115,7 +115,7 @@
         font-style: normal;
         color: variables.$primary-font-color;
         height: 20px;
-        // border: 1px solid black;
+        border:none;
         outline: none;
     }
 

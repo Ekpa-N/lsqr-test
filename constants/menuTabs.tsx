@@ -116,6 +116,29 @@ const tabs = [
     },
 ]
 
+export const userCards = [
+    {
+        img:"../images/users/users-box.svg",
+        title:"users",
+        data: "total_users"
+    },
+    {
+        img:"../images/users/active-users.svg",
+        title:"active users",
+        data: "active_users"
+    },
+    {
+        img:"../images/users/users-with-loans.svg",
+        title:"users with loans",
+        data: "users_with_loans"
+    },
+    {
+        img:"../images/users/users-with-savings.svg",
+        title:"users with savings",
+        data: "users_with_savings"
+    },
+]
+
 export const detailsOptions = [
     {
         name: "View Details",

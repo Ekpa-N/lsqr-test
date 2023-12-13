@@ -7,12 +7,13 @@ import Link from "next/link"
 import Paginator from "@/components/Paginator"
 import axios from "axios"
 import Selector from "@/components/Selector"
-import { perPage } from '@/constants'
+import { perPage, userCards } from '@/constants'
 import TableHolder from "@/components/TableHolder"
 import { usersTableHeaders } from "@/constants/tableMax"
 import Row from "@/components/TableRow"
 import { formatDate, formatFilterDate, removeDuplicates, filterUsers } from "@/constants/helpers"
 import { redirect, useRouter } from 'next/navigation'
+import { listenerCount } from "process"
 
 
 export default function Users() {
@@ -31,6 +32,7 @@ export default function Users() {
     const [filters, setFilters] = useState<{ organization: string, username: string, email: string, date: string, phone: string, status: string }>({ organization: "", username: "", email: "", date: "", phone: "", status: "" })
     const [filterCalendar, setFilterCalendar] = useState<boolean>(false)
     const [total, setTotal]= useState<number | undefined>()
+    const [cards, setCards] = useState<{[key: string]: string}>({active_users:"", total_users:"", users_with_loans:"", users_with_savings:""})
 
     useEffect(() => {
         const fetchData = async () => {
@@ -40,8 +42,17 @@ export default function Users() {
             while (attempts < maxAttempts) {
                 try {
                     const response = await axios.get(process.env.api as string);
-                    setUsers({ ...users, userData: response.data });                    
-                    const unfilteredOrgList = response.data.map((user: { organization: string }): string => user.organization || "")
+                    let newCards = {}
+                    const allKeys = Object.keys(response.data)
+                    allKeys.forEach((key)=>{
+                        if(cards.hasOwnProperty(key)) {
+                            newCards={...newCards, [key]: response.data[key]}
+                        }                      
+                    })
+                    console.log("all set: ", newCards)
+                    setCards(newCards) 
+                    setUsers({ ...users, userData: response.data.users_table });                    
+                    const unfilteredOrgList = response.data.users_table.map((user: { organization: string }): string => user.organization || "")
                     const filteredOrgList = removeDuplicates(unfilteredOrgList)
                     filteredOrgList.unshift("")
                     setOrgList(filteredOrgList)
@@ -192,12 +203,19 @@ export default function Users() {
                 Users
             </h2>
 
-            {/* <div className={`${userstyles["card-holder"]}`}>
-                <div className={`${userstyles.card}`}></div>
-                <div className={`${userstyles.card}`}></div>
-                <div className={`${userstyles.card}`}></div>
-                <div className={`${userstyles.card}`}></div>
-            </div> */}
+            <div className={`${userstyles["card-holder"]}`}>
+                {userCards.map((userCard, index)=>{
+                    return (
+                        <div key={index} className={`${userstyles.card}`}>
+                            <div className={`${userstyles.icon}`}>
+                                <ImageHolder filling={true} src={userCard.img} />
+                            </div>
+                            <h2 className={`${userstyles.title}`}>{userCard.title}</h2>
+                            <div className={`${userstyles.value}`}>{cards[userCard.data]}</div>
+                        </div>
+                    )
+                })}
+            </div>
 
             <TableHolder applyFilter={applyFilter} handleFilterDate={handleFilterDate} filterCalendar={filterCalendar} openFilterCalendar={openFilterCalendar} filterList={filters} filterChange={handleChange} orgList={orgList} filterModal={{ isOpen: filterTabMargin.isOpen, margin: filterTabMargin.margin, tab: filterTabMargin.tab }}>
                 <thead>

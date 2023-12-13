@@ -1,8 +1,8 @@
 'use client'
 import { useEffect, useState } from "react"
 import ImageHolder from "@/components/ImageHolder"
-import variables from "@/styles/variables.module.scss"
 import home from "@/styles/homepage.module.scss"
+import userstyles from "@/styles/usersPage.module.scss"
 import Inputer from "@/components/Inputer"
 import Link from "next/link"
 
